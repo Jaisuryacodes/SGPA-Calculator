@@ -2,30 +2,32 @@ import { useEffect, useState } from 'react';
 import './App.css';
 function App() {
   const [subject, setSubject] = useState();
-  const [sgpa, setSGPA] = useState(7.808);
+  const [sgpa, setSGPA] = useState();
   const [ArrOfSubject, setArrOfSubject] = useState([]);
   const [PreviousCGPA,setPreviousCGPA]=useState();
   const [noOfSemester,setNoOfSemester]=useState(1);
+  const [overallCGPA, setoverallCGPA] = useState();
 
   var totalCredit = 0,
     Total = 0;
 
+
   function Enter() {
     for (var i = 1; i <= subject; i++) {
       let subCredit = parseInt(prompt(`Credit of SUBJECT ${i}`));
-      let subGrade = parseInt(prompt(`Grade of SUBJECT ${i}`));
+      let subGrade = parseFloat(prompt(`Grade of SUBJECT ${i}`));
       totalCredit = totalCredit + subCredit;
       Total += subGrade * subCredit;
     }
     setSGPA((Total / totalCredit).toFixed(3));
-    console.log(Total);
-    console.log(totalCredit);
-    
   }
 function CalculateCGPA (){
- let val1=(PreviousCGPA * noOfSemester) + sgpa;
- let dvalues=noOfSemester+1;
-  console.log( dvalues)
+ let val1=parseInt((parseFloat(PreviousCGPA) * parseInt(noOfSemester)) +parseFloat(sgpa));
+ let v1 = parseInt('1');
+  let NoOfSemester = parseInt(noOfSemester);
+ let dvalues=NoOfSemester+v1;
+
+  setoverallCGPA( (val1/ dvalues).toFixed(3))
 
 }
 
@@ -52,7 +54,7 @@ function CalculateCGPA (){
         </div>
         <h1>NOTE </h1>
         <h1> Grade points based on as follows </h1>
-        <h1> O - 10 | A+ - 9 | A - 8 | B+ - 7 | B - 6 | C - 5 | U- RA / 0 </h1>
+        <h1> O - 10 | A+ - 9 | A - 8 | B+ - 7 | B - 6 | C - 5 | U - 0 | CS - 0 |  </h1>
       </div>
       <div className="bg-[#6b686b] mt-4  text-white flex flex-col gap-9 justify-center align-middle items-center  p-5  ">
         <h1>Enter the no of Subject </h1>
@@ -74,9 +76,9 @@ function CalculateCGPA (){
       <div className=""></div>
       <div className="p-3  bg-[#cc38c2]  " id="MainContent">
         <div className=" flex font-extrabold text-white gap-2 justify-center align-middle items-center">
-          <h1>Your Current Semester SGPA </h1>
+          <h1>Your Current Semester SGPA :</h1>
           <div className="bg-[#6b686b] p-2  border-[2px] border-[#f7f7f7]">
-            {sgpa ? <h1>: {sgpa}</h1> : <h1>{sgpa}</h1>}
+            {sgpa ? <h1> {sgpa}</h1> : <h1> 👆 Enter no of subject </h1>}
           </div>
         </div>
         <div className="bg-[#6b686b] mt-4  text-white flex flex-col gap-4 justify-center align-middle items-center  p-5  ">
@@ -95,6 +97,18 @@ function CalculateCGPA (){
             onChange={(e) => setNoOfSemester(e.target.value)}
           />
           <button onClick={CalculateCGPA}>CalculateCGPA</button>
+          <div className=" flex font-extrabold text-white gap-2 justify-center align-middle items-center">
+            <h1 className="bg-[#cc38c2]  p-2  ">
+              Your Current Semester SGPA :{" "}
+            </h1>
+            <div className="bg-[#cc38c2] p-2  border-[2px] border-[#f7f7f7]">
+              {overallCGPA ? (
+                <h1>: {overallCGPA}</h1>
+              ) : (
+                <h1>Enter the value </h1>
+              )}
+            </div>
+          </div>
         </div>
       </div>
       <div className="">
@@ -106,7 +120,7 @@ function CalculateCGPA (){
             Share to your Friends and help to Calculate the CGPA / SGPA of
             current semester
           </h3>
-          <h3> Thankyou Guys keep in Supporting</h3>
+          <h3> Thankyou Guys keep in Support 💚</h3>
         </div>
       </div>
     </>
